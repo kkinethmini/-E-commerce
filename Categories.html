@@ -1,0 +1,453 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Audio Categories - TechStore</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Header Styles */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #5642a6;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: #764ba2;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #5642a6;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #5642a6;
+            background: rgba(86, 66, 166, 0.1);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 180px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            border-radius: 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            padding: 8px 40px 8px 16px;
+            border: 2px solid #e1e1e1;
+            border-radius: 25px;
+            background: white;
+            width: 200px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #5642a6;
+            width: 250px;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            color: #666;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+
+        .page-title {
+            text-align: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 24px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(86, 66, 166, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .category-card:hover::before {
+            left: 100%;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .category-title {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .category-desc {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .category-products {
+            font-size: 0.9rem;
+            color: #5642a6;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 20px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .navbar {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+                background: rgba(255, 255, 255, 0.98);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                border-radius: 0 0 20px 20px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+                padding: 20px 0;
+            }
+
+            .navbar.active {
+                display: flex;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                gap: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 15px 30px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 0;
+            }
+
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: rgba(86, 66, 166, 0.05);
+                margin-left: 20px;
+                border-radius: 10px;
+                margin-top: 10px;
+            }
+
+            .search-container {
+                margin-top: 20px;
+                width: calc(100% - 60px);
+                margin-left: 30px;
+                margin-bottom: 10px;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .main-content {
+                padding: 40px 20px;
+            }
+
+            .categories {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo" onclick="goHome()">🎧 TechStore</div>
+
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+            <nav class="navbar" id="navbar">
+                <ul class="nav-links">
+                    <li><a href="home.html" onclick="navigateTo('home')">Home</a></li>
+
+                    <li class="dropdown">
+                        <a href="product.html">Products ▾</a>
+                        <div class="dropdown-content">
+                            <a href="product.html" onclick="navigateTo('headphones')">Headphones</a>
+                            <a href="product.html" onclick="navigateTo('speakers')">Speakers</a>
+                            <a href="product.html" onclick="navigateTo('earbuds')">Earbuds</a>
+                            <a href="product.html" onclick="navigateTo('accessories')">Accessories</a>
+                        </div>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="Categories.html">Categories ▾</a>
+                        <div class="dropdown-content">
+                            <a href="Categories.html" onclick="navigateTo('wireless')">Wireless</a>
+                            <a href="Categories.html" onclick="navigateTo('gaming')">Gaming</a>
+                            <a href="Categories.html" onclick="navigateTo('professional')">Professional</a>
+                            <a href="Categories.html" onclick="navigateTo('budget')">Budget Friendly</a>
+                        </div>
+                    </li>
+
+                    <li><a href="about.html" onclick="navigateTo('about')">About</a></li>
+                    <li><a href="contact.html" onclick="navigateTo('contact')">Contact</a></li>
+                </ul>
+
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search audio products..." onkeyup="searchProducts(event)">
+                    <span class="search-icon">🔍</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <h1 class="page-title">Audio Categories</h1>
+        <p class="page-subtitle">Discover the perfect sound solution for every need</p>
+        
+        <div class="categories">
+            <div class="category-card" onclick="navigateTo('wireless')">
+                <div class="category-icon">📶</div>
+                <div class="category-title">Wireless Audio</div>
+                <div class="category-desc">Freedom from wires with Bluetooth headphones, earbuds, and wireless speakers.</div>
+                <div class="category-products">25+ Products</div>
+            </div>
+            
+            <div class="category-card" onclick="navigateTo('gaming')">
+                <div class="category-icon">🎮</div>
+                <div class="category-title">Gaming Audio</div>
+                <div class="category-desc">Immersive gaming headsets with surround sound and crystal-clear microphones.</div>
+                <div class="category-products">18+ Products</div>
+            </div>
+            
+            <div class="category-card" onclick="navigateTo('professional')">
+                <div class="category-icon">🎵</div>
+                <div class="category-title">Professional Audio</div>
+                <div class="category-desc">Studio-grade headphones and monitors for musicians, producers, and audiophiles.</div>
+                <div class="category-products">22+ Products</div>
+            </div>
+            
+            <div class="category-card" onclick="navigateTo('budget')">
+                <div class="category-icon">💰</div>
+                <div class="category-title">Budget Friendly</div>
+                <div class="category-desc">Quality audio solutions that won't break the bank, without compromising on sound.</div>
+                <div class="category-products">30+ Products</div>
+            </div>
+            
+            <div class="category-card" onclick="navigateTo('premium')">
+                <div class="category-icon">⭐</div>
+                <div class="category-title">Premium Collection</div>
+                <div class="category-desc">Luxury audio equipment featuring the latest technology and superior craftsmanship.</div>
+                <div class="category-products">15+ Products</div>
+            </div>
+            
+            <div class="category-card" onclick="navigateTo('accessories')">
+                <div class="category-icon">🔧</div>
+                <div class="category-title">Accessories</div>
+                <div class="category-desc">Cables, stands, cases, and other essential accessories for your audio setup.</div>
+                <div class="category-products">40+ Products</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('active');
+        }
+
+        function navigateTo(category) {
+            console.log(`Navigating to ${category} category`);
+            // Add your navigation logic here
+        }
+
+        function goHome() {
+            console.log('Navigating to home');
+            // Add your home navigation logic here
+        }
+
+        function searchProducts(event) {
+            if (event.key === 'Enter') {
+                const searchTerm = event.target.value;
+                console.log(`Searching for: ${searchTerm}`);
+                // Add your search logic here
+            }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navbar = document.getElementById('navbar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!navbar.contains(event.target) && !menuToggle.contains(event.target)) {
+                navbar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
