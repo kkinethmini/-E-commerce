@@ -1,0 +1,403 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Wireless Headphones - TechStore</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content"  >
+            <div class="logo" onclick="goHome()" >TechStore</div>
+            
+            <!-- Navigation -->
+            <nav class="navbar" id="navbar">
+                <ul class="nav-links">
+                    <li><a href="home.html" onclick="navigateTo('home')">Home</a></li>
+                    
+                    
+ <li class="dropdown">
+                    <a href="product.html">Order Product  ▾</a>
+                    <div class="dropdown-content">
+                        <a href="product.html" onclick="navigateTo('headphones')">Headphones</a>
+                        <a href="product.html" onclick="navigateTo('speakers')">Speakers</a>
+                        <a href="product.html" onclick="navigateTo('earbuds')">Earbuds</a>
+                        <a href="product.html" onclick="navigateTo('accessories')">Accessories</a>
+                    </div>
+               
+
+                    </li>
+                    <li class="dropdown">
+                        <a href="Categories.html" onclick="navigateTo('categories')">Categories ▾</a>
+                        <div class="dropdown-content">
+                            <a href="Categories.html" onclick="navigateTo('wireless')">Wireless</a>
+                            <a href="Categories.html" onclick="navigateTo('gaming')">Gaming</a>
+                            <a href="Categories.html" onclick="navigateTo('professional')">Professional</a>
+                            <a href="Categories.html" onclick="navigateTo('budget')">Budget Friendly</a>
+                        </div>
+                    </li>
+                     
+                    <li><a href="about.html" onclick="navigateTo('about')">About</a></li>
+                    <li><a href="contact.html" onclick="navigateTo('contact')">Contact</a></li>
+                </ul>
+
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" placeholder="Search products..." onkeyup="searchProducts(event)">
+                </div>
+            </nav>
+
+            <!-- Header Icons -->
+            <div class="header-icons">
+                <div class="header-icon" onclick="showAccount()" title="Account">
+                    👤
+                </div>
+                <div class="header-icon" onclick="showWishlist()" title="Wishlist">
+                    ♡
+                    <span class="wishlist-count" id="wishlistCount">0</span>
+                </div>
+                <div class="header-icon" onclick="showCart()" title="Cart">
+                    🛒
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Product Section -->
+        <div class="product-section">
+            <div class="product-container">
+                <!-- Product Images -->
+                <div class="product-images">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&h=400&fit=crop" 
+                         alt="Premium Wireless Headphones" class="main-image" id="mainImage">
+                    
+                    <div class="thumbnail-images">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100&h=100&fit=crop" 
+                             alt="Front view" class="thumbnail active" onclick="changeImage(this)">
+                        <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=100&h=100&fit=crop" 
+                             alt="Side view" class="thumbnail" onclick="changeImage(this)">
+                        <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=100&h=100&fit=crop" 
+                             alt="Detail view" class="thumbnail" onclick="changeImage(this)">
+                        <img src="https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?w=100&h=100&fit=crop" 
+                             alt="Lifestyle view" class="thumbnail" onclick="changeImage(this)">
+                    </div>
+                </div>
+
+                <!-- Product Details -->
+                <div class="product-details">
+                    <h1>Premium Wireless Headphones</h1>
+                    
+                    <div class="product-rating">
+                        <div class="stars">★★★★★</div>
+                        <span class="rating-text">(2,847 reviews)</span>
+                    </div>
+
+                    <div class="price-section">
+                        <span class="current-price">$299.99</span>
+                        <span class="original-price">$399.99</span>
+                        <span class="discount-badge">25% OFF</span>
+                    </div>
+
+                    <div class="product-description">
+                        Experience premium sound quality with our latest wireless headphones. Featuring active noise cancellation, 
+                        30-hour battery life, and superior comfort for all-day wear. Perfect for music lovers, professionals, 
+                        and anyone who demands excellence in audio.
+                    </div>
+
+                    <!-- Product Options -->
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Color</label>
+                            <div class="color-options">
+                                <div class="color-option selected" style="background-color: #2c3e50" data-color="midnight"></div>
+                                <div class="color-option" style="background-color: #ecf0f1" data-color="silver"></div>
+                                <div class="color-option" style="background-color: #e74c3c" data-color="red"></div>
+                                <div class="color-option" style="background-color: #3498db" data-color="blue"></div>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">Size</label>
+                            <div class="size-options">
+                                <div class="size-option" data-size="small">Small</div>
+                                <div class="size-option selected" data-size="medium">Medium</div>
+                                <div class="size-option" data-size="large">Large</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quantity Selector -->
+                     <div class="quantity-selector">
+                        <span class="quantity-label">Quantity:</span>
+                        <div class="quantity-controls">
+                            <button class="qty-btn" onclick="updateQuantity(-1)">-</button>
+                            <input type="number" class="qty-input" value="1" min="1" max="10" id="quantity">
+                            <button class="qty-btn" onclick="updateQuantity(1)">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
+                        <button class="btn btn-secondary" onclick="addToWishlist()">♡ Wishlist</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Features -->
+        <div class="product-features">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🔊</div>
+                    <div>
+                        <strong>Premium Sound</strong><br>
+                        Hi-Fi audio quality
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔋</div>
+                    <div>
+                        <strong>30H Battery</strong><br>
+                        Long-lasting power
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <div>
+                        <strong>Noise Cancelling</strong><br>
+                        Active ANC technology
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <div>
+                        <strong>Bluetooth 5.0</strong><br>
+                        Stable connection
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="reviews-section">
+            <h2 class="section-title">Customer Reviews</h2>
+            
+            <div class="review-item">
+                <div class="review-header">
+                    <div>
+                        <div class="reviewer-name">Sarah Johnson</div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <div class="review-date">March 15, 2024</div>
+                </div>
+                <div class="review-text">
+                    Absolutely love these headphones! The sound quality is incredible and the noise cancellation works perfectly. 
+                    Great for my daily commute and long work sessions.
+                </div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <div>
+                        <div class="reviewer-name">Mike Chen</div>
+                        <div class="stars">★★★★☆</div>
+                    </div>
+                    <div class="review-date">March 10, 2024</div>
+                </div>
+                <div class="review-text">
+                    Great headphones overall. Battery life is as advertised and they're very comfortable. 
+                    Only minor complaint is they could use a bit more bass for electronic music.
+                </div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <div>
+                        <div class="reviewer-name">Emma Davis</div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <div class="review-date">March 5, 2024</div>
+                </div>
+                <div class="review-text">
+                    Perfect for remote work! The noise cancellation helps me focus, and the battery lasts all day. 
+                    Highly recommend for anyone working from home.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        Item added to cart successfully!
+    </div>
+
+     <script>
+        // Cart functionality
+        let cart = [];
+        let cartCount = 0;
+
+        // Selected options
+        let selectedColor = 'midnight';
+        let selectedSize = 'medium';
+
+        // Change main image
+        function changeImage(thumbnail) {
+            const mainImage = document.getElementById('mainImage');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            
+            // Remove active class from all thumbnails
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            
+            // Add active class to clicked thumbnail
+            thumbnail.classList.add('active');
+            
+            // Change main image source
+            mainImage.src = thumbnail.src.replace('w=100&h=100', 'w=500&h=400');
+        }
+
+        // Update quantity
+        function updateQuantity(change) {
+            const quantityInput = document.getElementById('quantity');
+            let currentValue = parseInt(quantityInput.value);
+            let newValue = currentValue + change;
+            
+            if (newValue >= 1 && newValue <= 10) {
+                quantityInput.value = newValue;
+            }
+        }
+
+        // Color selection
+        document.querySelectorAll('.color-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedColor = this.dataset.color;
+            });
+        });
+
+        // Size selection
+        document.querySelectorAll('.size-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedSize = this.dataset.size;
+            });
+        });
+
+        // Add to cart
+        function addToCart() {
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const price = 299.99;
+            
+            const item = {
+                id: Date.now(),
+                name: 'Premium Wireless Headphones',
+                price: price,
+                quantity: quantity,
+                color: selectedColor,
+                size: selectedSize,
+                image: document.getElementById('mainImage').src
+            };
+            
+            cart.push(item);
+            cartCount += quantity;
+            
+            // Update cart count display
+            document.getElementById('cartCount').textContent = cartCount;
+            
+            // Show success message
+            showSuccessMessage();
+            
+            // Add loading effect to button
+            const addButton = event.target;
+            const originalText = addButton.textContent;
+            addButton.textContent = 'Adding...';
+            addButton.classList.add('pulse');
+            
+            setTimeout(() => {
+                addButton.textContent = originalText;
+                addButton.classList.remove('pulse');
+            }, 1000);
+        }
+
+        // Add to wishlist
+        function addToWishlist() {
+            const wishlistButton = event.target;
+            const isInWishlist = wishlistButton.textContent.includes('♥');
+            
+            if (isInWishlist) {
+                wishlistButton.innerHTML = '♡ Wishlist';
+                wishlistButton.style.color = '#667eea';
+            } else {
+                wishlistButton.innerHTML = '♥ In Wishlist';
+                wishlistButton.style.color = '#e74c3c';
+            }
+        }
+
+        // Show success message
+        function showSuccessMessage() {
+            const message = document.getElementById('successMessage');
+            message.classList.add('show');
+            
+            setTimeout(() => {
+                message.classList.remove('show');
+            }, 3000);
+        }
+
+        // Show cart (placeholder function)
+        function showCart() {
+            alert(`Cart contains ${cartCount} item(s)\n\nThis would normally open a cart modal or navigate to cart page.`);
+        }
+
+        // Quantity input validation
+        document.getElementById('quantity').addEventListener('input', function() {
+            let value = parseInt(this.value);
+            if (value < 1) this.value = 1;
+            if (value > 10) this.value = 10;
+        });
+
+        // Add smooth scroll behavior for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.product-section, .reviews-section, .product-features').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s, transform 0.6s';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
